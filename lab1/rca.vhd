@@ -11,3 +11,14 @@ entity rca is
         O: out std_logic_vector(width-1 downto 0)
     );
 end rca;
+
+architecture structural of rca is:
+
+component fa
+    port(
+        a, b: in std_logic;
+        cin: in std_logic;
+        cout: out std_logic
+    );
+end component
+
