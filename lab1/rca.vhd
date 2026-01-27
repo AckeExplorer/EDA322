@@ -14,7 +14,7 @@ end rca;
 
 
 
-architecture structural of rca is:
+architecture structural of rca is
 
 component fa
     port(
@@ -23,23 +23,23 @@ component fa
         cout: out std_logic;
         s: out std_logic
     );
-end component
+end component;
 
 signal carry: std_logic_vector(width-1 downto 0);
 
 begin
     carry(0) <= cin;
 
-    G1: for i in 0 to 7 generate
+    G1: for i in 0 to width-1 generate
         adders: entity work.fa(dataflow) port map(
             a => A(i),
             b => B(i),
             cin => carry(i),
-            cout => carry(i+1)
+            cout => carry(i+1),
             s => O(i),
         );
-    end generate
+    end generate;
 
     cout <= carry(7);
-    
-end structural
+
+end structural;
