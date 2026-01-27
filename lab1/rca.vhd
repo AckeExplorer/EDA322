@@ -12,6 +12,8 @@ entity rca is
     );
 end rca;
 
+
+
 architecture structural of rca is:
 
 component fa
@@ -23,14 +25,21 @@ component fa
     );
 end component
 
+signal carry: std_logic_vector(width-1 downto 0);
+
 begin
+    carry(0) <= cin;
+
     G1: for i in 0 to 7 generate
         adders: entity work.fa(dataflow) port map(
-            cin => cin
-            a => A(i)
-            b => B(i)
-            O(i) <= s
-            cout <= cout
+            a => A(i),
+            b => B(i),
+            cin => carry(i),
+            cout => carry(i+1)
+            s => O(i),
         );
     end generate
+
+    cout <= carry(7);
+    
 end structural
