@@ -9,3 +9,13 @@ entity fa is
         s: out std_logic
     );
 end fa;
+
+architecture dataflow of fa is:
+
+signal a_xor_b: std_logic;
+
+begin
+    a_xor_b <= a XOR b;
+    s <= cin XOR a_xor_b;
+    cout <= (cin AND a_xor_b) OR (a AND b);
+end
