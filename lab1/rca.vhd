@@ -25,7 +25,7 @@ component fa
     );
 end component;
 
-signal carry: std_logic_vector(width-1 downto 0);
+signal carry: std_logic_vector(width downto 0);
 
 begin
     carry(0) <= cin;
@@ -40,6 +40,6 @@ begin
         );
     end generate;
 
-    cout <= carry(7);
+    cout <= carry(width);
 
 end structural;
