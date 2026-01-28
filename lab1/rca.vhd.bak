@@ -36,10 +36,10 @@ begin
             b => B(i),
             cin => carry(i),
             cout => carry(i+1),
-            s => O(i)
+            s => O(i),
         );
     	end generate;
 
-cout <= carry(width);
+    cout <= carry(width);
 
 end structural;

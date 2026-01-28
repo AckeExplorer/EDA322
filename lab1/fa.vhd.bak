@@ -18,4 +18,4 @@ begin
     a_xor_b <= a XOR b;
     s <= cin XOR a_xor_b;
     cout <= (cin AND a_xor_b) OR (a AND b);
-end dataflow;
+end
