@@ -21,15 +21,6 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling entity fa
 -- Compiling architecture dataflow of fa
 
-} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/cmp.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/cmp.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package ATTRIBUTES
--- Loading package std_logic_misc
--- Compiling entity cmp
-
 } {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/memory.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/memory.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
@@ -55,6 +46,16 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Compiling package chacc_pkg
+
+} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_csa.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_csa.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ATTRIBUTES
+-- Loading package std_logic_misc
+-- Compiling entity tb_csa
+-- Compiling architecture tb_csa_arch of tb_csa
 
 } {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/rca.vhd {1 {vcom -work work -2002 -explicit -stats=none {C:\Users\anton\Documents\EDA322\EDA322\lab1\rca.vhd}
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
@@ -107,15 +108,5 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading package chacc_pkg
 -- Compiling entity mux
 -- Compiling architecture dataflow of mux
-
-} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/alu.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/alu.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package ATTRIBUTES
--- Loading package std_logic_misc
--- Loading package chacc_pkg
--- Compiling entity alu
 
 } {} {}}
