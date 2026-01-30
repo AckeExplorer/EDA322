@@ -14,3 +14,8 @@ entity mux is
         o : out std_logic_vector(d_width-1 downto 0)
     );
 end mux;
+
+architecture dataflow of mux is
+begin
+    o <= i0 when s = '0' else i1;
+end dataflow;
