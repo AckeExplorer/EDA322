@@ -12,6 +12,6 @@ end cmp;
 architecture dataflow of cmp is
 
 begin
-    e <= or_reduce(a XOR b);
+    e <= NOT or_reduce(a XOR b);
     
 end dataflow;
