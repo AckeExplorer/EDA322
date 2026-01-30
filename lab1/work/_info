@@ -11,16 +11,13 @@ z2
 cModel Technology
 Z0 dC:/Users/anton/Documents/EDA322/EDA322/lab1
 Ealu
+w1769767566
 Z1 DPx4 work 9 chacc_pkg 0 22 7lV]Y0BgEi1R=3j?Gb2G93
 Z2 DPx8 synopsys 10 attributes 0 22 dc>JdEHRM@6GGENe5bZ?D1
 Z3 DPx4 ieee 14 std_logic_misc 0 22 dN]HY6l5ohPcZ:TaC@B;53
 Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z5 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-32
-!s110 1769631684
-!i10b 1
-Z6 w1769521321
-!i122 11
+!i122 37
 R0
 8C:/Users/anton/Documents/EDA322/EDA322/lab1/alu.vhd
 FC:/Users/anton/Documents/EDA322/EDA322/lab1/alu.vhd
@@ -28,21 +25,24 @@ l0
 L8 1
 VL0EhalQVT@C_?YV><LQE`3
 !s100 6T4U<lnh37OPFIRLg^]=h0
-Z7 OV;C;2020.1;71
-!s108 1769631684.000000
+Z6 OV;C;2020.1;71
+32
+!s110 1769767591
+!i10b 1
+!s108 1769767591.000000
 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/alu.vhd|
 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/alu.vhd|
 !i113 1
-Z8 o-work work -2002 -explicit
-Z9 tExplicit 1 CvgOpt 0
+Z7 o-work work -2002 -explicit
+Z8 tExplicit 1 CvgOpt 0
 Pchacc_pkg
 R4
 R5
 32
-Z10 !s110 1769631674
+Z9 !s110 1769631674
 !i10b 1
 !i122 0
-R6
+Z10 w1769521321
 R0
 8C:/Users/anton/Documents/EDA322/EDA322/lab1/chacc_pkg.vhd
 FC:/Users/anton/Documents/EDA322/EDA322/lab1/chacc_pkg.vhd
@@ -50,94 +50,115 @@ l0
 L4 1
 V7lV]Y0BgEi1R=3j?Gb2G93
 !s100 5lOY0YAagA>LOzLWcKN=B3
-R7
+R6
 Z11 !s108 1769631674.000000
 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/chacc_pkg.vhd|
 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/chacc_pkg.vhd|
 !i113 1
+R7
 R8
-R9
 Ecmp
+Z12 w1769766476
 R2
 R3
 R4
 R5
-32
-R10
-!i10b 1
-R6
-!i122 1
+!i122 36
 R0
-8C:/Users/anton/Documents/EDA322/EDA322/lab1/cmp.vhd
-FC:/Users/anton/Documents/EDA322/EDA322/lab1/cmp.vhd
+Z13 8C:/Users/anton/Documents/EDA322/EDA322/lab1/cmp.vhd
+Z14 FC:/Users/anton/Documents/EDA322/EDA322/lab1/cmp.vhd
 l0
 L6 1
 VDe?6B<R`UF6K_[MOU4WNB0
 !s100 7CXLKHHi0cizGG8eKLZcB0
-R7
-R11
-!s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/cmp.vhd|
-!s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/cmp.vhd|
+R6
+32
+Z15 !s110 1769767583
+!i10b 1
+Z16 !s108 1769767583.000000
+Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/cmp.vhd|
+Z18 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/cmp.vhd|
 !i113 1
+R7
 R8
-R9
+Adataflow
+R2
+R3
+R4
+R5
+DEx4 work 3 cmp 0 22 De?6B<R`UF6K_[MOU4WNB0
+!i122 36
+l14
+L12 6
+V9Z0oMK6JAV=]OOE<Q<=9f3
+!s100 CP^dXJFDeGzK2S9b@j4P73
+R6
+32
+R15
+!i10b 1
+R16
+R17
+R18
+!i113 1
+R7
+R8
 Ecsa
 R2
 R3
 R4
 R5
 32
-Z12 !s110 1769764630
+Z19 !s110 1769764630
 !i10b 1
-Z13 w1769764576
+Z20 w1769764576
 !i122 33
 R0
-Z14 8C:/Users/anton/Documents/EDA322/EDA322/lab1/csa.vhd
-Z15 FC:/Users/anton/Documents/EDA322/EDA322/lab1/csa.vhd
+Z21 8C:/Users/anton/Documents/EDA322/EDA322/lab1/csa.vhd
+Z22 FC:/Users/anton/Documents/EDA322/EDA322/lab1/csa.vhd
 l0
 L6 1
 VL7kbIMeV<jm@87hY^:LPg3
 !s100 bgG_nQ_7GZ=3:Rh]kI;Rb0
-R7
-Z16 !s108 1769764630.000000
-Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/csa.vhd|
-Z18 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/csa.vhd|
+R6
+Z23 !s108 1769764630.000000
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/csa.vhd|
+Z25 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/csa.vhd|
 !i113 1
+R7
 R8
-R9
 Astructural
 R1
-Z19 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
-Z20 DEx4 work 3 mux 0 22 lzMgF8e6ZZ`BHXmc>gcNW1
-Z21 DEx4 work 3 rca 0 22 ;]OCQkTQG[j5o8:>:Gl;f1
+Z26 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z27 DEx4 work 3 mux 0 22 lzMgF8e6ZZ`BHXmc>gcNW1
+Z28 DEx4 work 3 rca 0 22 ;]OCQkTQG[j5o8:>:Gl;f1
 R2
 R3
 R4
 R5
 DEx4 work 3 csa 0 22 L7kbIMeV<jm@87hY^:LPg3
 32
-R12
+R19
 !i10b 1
 !i122 33
 l42
 L15 75
 V9>4lCVIn1A:7KIT0FJj5?3
 !s100 W>>3e7<jMSoke`gJGL1[L0
-R7
-R16
-R17
-R18
+R6
+R23
+R24
+R25
 !i113 1
+R7
 R8
-R9
 Eeda322_processor
-R19
+R26
 R4
 R5
 32
-R10
+R9
 !i10b 1
-R6
+R10
 !i122 3
 R0
 8C:/Users/anton/Documents/EDA322/EDA322/lab1/EDA322_processor.vhd
@@ -146,63 +167,63 @@ l0
 L6 1
 V;ILoH7?lj1EYWhzQ91QLd0
 !s100 DG31n_:kBN]a]gEcN5EMF0
-R7
+R6
 R11
 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/EDA322_processor.vhd|
 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/EDA322_processor.vhd|
 !i113 1
+R7
 R8
-R9
 Efa
 R4
 R5
 32
-Z22 !s110 1769632104
+Z29 !s110 1769632104
 !i10b 1
-Z23 w1769632074
+Z30 w1769632074
 !i122 15
 R0
-Z24 8C:\Users\anton\Documents\EDA322\EDA322\lab1\fa.vhd
-Z25 FC:\Users\anton\Documents\EDA322\EDA322\lab1\fa.vhd
+Z31 8C:\Users\anton\Documents\EDA322\EDA322\lab1\fa.vhd
+Z32 FC:\Users\anton\Documents\EDA322\EDA322\lab1\fa.vhd
 l0
 L4 1
 V1ao01zASigZ[l9STFT2Ra2
 !s100 Y2o[1PUJL0N3]jNDZ@AAV2
-R7
-Z26 !s108 1769632104.000000
-Z27 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\anton\Documents\EDA322\EDA322\lab1\fa.vhd|
-Z28 !s107 C:\Users\anton\Documents\EDA322\EDA322\lab1\fa.vhd|
+R6
+Z33 !s108 1769632104.000000
+Z34 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\anton\Documents\EDA322\EDA322\lab1\fa.vhd|
+Z35 !s107 C:\Users\anton\Documents\EDA322\EDA322\lab1\fa.vhd|
 !i113 1
+R7
 R8
-R9
 Adataflow
 R4
 R5
-Z29 DEx4 work 2 fa 0 22 1ao01zASigZ[l9STFT2Ra2
+Z36 DEx4 work 2 fa 0 22 1ao01zASigZ[l9STFT2Ra2
 32
-R22
+R29
 !i10b 1
 !i122 15
 l17
 L13 9
 VZld:W4R=LbWbZmmFfeW5I3
 !s100 P1HagDGbVLYgD@0g;`Kc61
-R7
-R26
-R27
-R28
+R6
+R33
+R34
+R35
 !i113 1
+R7
 R8
-R9
 Ememory
 R1
-R19
+R26
 R4
 R5
 32
-R10
+R9
 !i10b 1
-R6
+R10
 !i122 5
 R0
 8C:/Users/anton/Documents/EDA322/EDA322/lab1/memory.vhd
@@ -211,66 +232,66 @@ l0
 L9 1
 Vab4A@jgJOLg5O`jNGmh5a0
 !s100 5W<9?]n^KUZaE[ALjU4aG0
-R7
+R6
 R11
 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/memory.vhd|
 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/memory.vhd|
 !i113 1
+R7
 R8
-R9
 Emux
 R1
-R19
+R26
 R4
 R5
 32
-Z30 !s110 1769762584
+Z37 !s110 1769762584
 !i10b 1
-Z31 w1769761733
+Z38 w1769761733
 !i122 25
 R0
-Z32 8C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd
-Z33 FC:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd
+Z39 8C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd
+Z40 FC:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd
 l0
 L8 1
 VlzMgF8e6ZZ`BHXmc>gcNW1
 !s100 lU?]9@>mN>Z_5CLejdW^K2
-R7
-Z34 !s108 1769762583.000000
-Z35 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd|
-Z36 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd|
+R6
+Z41 !s108 1769762583.000000
+Z42 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd|
+Z43 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd|
 !i113 1
+R7
 R8
-R9
 Adataflow
 R1
-R19
+R26
 R4
 R5
-R20
+R27
 32
-R30
+R37
 !i10b 1
 !i122 25
 l19
 L18 4
 V2fP:NJBz_?S=DnE_=GWSS2
 !s100 `;]9aIMON9mZUT;B;RM^A2
-R7
-R34
-R35
-R36
+R6
+R41
+R42
+R43
 !i113 1
+R7
 R8
-R9
 Eproc_bus
 R1
 R4
 R5
 32
-Z37 !s110 1769631675
+Z44 !s110 1769631675
 !i10b 1
-R6
+R10
 !i122 7
 R0
 8C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_bus.vhd
@@ -279,22 +300,22 @@ l0
 L7 1
 V36@gnN;[?VXdQED_gD@oA1
 !s100 1ESP>JQD9`=^j19>XGW<I3
-R7
-Z38 !s108 1769631675.000000
+R6
+Z45 !s108 1769631675.000000
 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_bus.vhd|
 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_bus.vhd|
 !i113 1
+R7
 R8
-R9
 Eproc_controller
 R1
-R19
+R26
 R4
 R5
 32
-R37
+R44
 !i10b 1
-R6
+R10
 !i122 8
 R0
 8C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd
@@ -303,66 +324,66 @@ l0
 L8 1
 VoHa>MTIHg89cj:<mCMkQM3
 !s100 78K`5`^lNS^H:n<1mmdPg3
-R7
-R38
+R6
+R45
 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd|
 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd|
 !i113 1
+R7
 R8
-R9
 Erca
 R2
 R3
 R4
 R5
 32
-Z39 !s110 1769632348
+Z46 !s110 1769632348
 !i10b 1
-Z40 w1769632332
+Z47 w1769632332
 !i122 22
 R0
-Z41 8C:\Users\anton\Documents\EDA322\EDA322\lab1\rca.vhd
-Z42 FC:\Users\anton\Documents\EDA322\EDA322\lab1\rca.vhd
+Z48 8C:\Users\anton\Documents\EDA322\EDA322\lab1\rca.vhd
+Z49 FC:\Users\anton\Documents\EDA322\EDA322\lab1\rca.vhd
 l0
 L5 1
 V;]OCQkTQG[j5o8:>:Gl;f1
 !s100 lh6;WbRR6a=LU@Q[[8SED1
-R7
-Z43 !s108 1769632348.000000
-Z44 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\anton\Documents\EDA322\EDA322\lab1\rca.vhd|
-Z45 !s107 C:\Users\anton\Documents\EDA322\EDA322\lab1\rca.vhd|
+R6
+Z50 !s108 1769632348.000000
+Z51 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\anton\Documents\EDA322\EDA322\lab1\rca.vhd|
+Z52 !s107 C:\Users\anton\Documents\EDA322\EDA322\lab1\rca.vhd|
 !i113 1
+R7
 R8
-R9
 Astructural
-R29
+R36
 R2
 R3
 R4
 R5
-R21
+R28
 32
-R39
+R46
 !i10b 1
 !i122 22
 l30
 L17 29
 V0z1P5YCUghgK[kW9_4:hA0
 !s100 EGi?Fo6;gIXBhm<`O3nST3
-R7
-R43
-R44
-R45
+R6
+R50
+R51
+R52
 !i113 1
+R7
 R8
-R9
 Ereg
 R4
 R5
 32
-R37
+R44
 !i10b 1
-R6
+R10
 !i122 10
 R0
 8C:/Users/anton/Documents/EDA322/EDA322/lab1/reg.vhd
@@ -371,37 +392,37 @@ l0
 L4 1
 V4gHo75U>kOezi3^kF?DN93
 !s100 nAe83Cdd]U8O?WkdDZmeT2
-R7
-R38
+R6
+R45
 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/reg.vhd|
 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/reg.vhd|
 !i113 1
+R7
 R8
-R9
 Etb_csa
 R2
 R3
 R4
 R5
 32
-Z46 !s110 1769765579
+Z53 !s110 1769765579
 !i10b 1
-Z47 w1769765559
+Z54 w1769765559
 !i122 35
 R0
-Z48 8C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_csa.vhd
-Z49 FC:/Users/anton/Documents/EDA322/EDA322/lab1/tb_csa.vhd
+Z55 8C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_csa.vhd
+Z56 FC:/Users/anton/Documents/EDA322/EDA322/lab1/tb_csa.vhd
 l0
 L5 1
 V]k<8zEHGRAWW=R06iEgeW1
 !s100 0@8P^zdVMn7L09`KHEQ]]3
-R7
-Z50 !s108 1769765579.000000
-Z51 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_csa.vhd|
-Z52 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_csa.vhd|
+R6
+Z57 !s108 1769765579.000000
+Z58 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_csa.vhd|
+Z59 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_csa.vhd|
 !i113 1
+R7
 R8
-R9
 Atb_csa_arch
 R2
 R3
@@ -409,44 +430,44 @@ R4
 R5
 DEx4 work 6 tb_csa 0 22 ]k<8zEHGRAWW=R06iEgeW1
 32
-R46
+R53
 !i10b 1
 !i122 35
 l25
 L8 50
 VaFQ<?6<ekz_Fad=8Ih_MT2
 !s100 K8:7Ub0=R1I4kKe_L@jmd3
-R7
-R50
-R51
-R52
+R6
+R57
+R58
+R59
 !i113 1
+R7
 R8
-R9
 Etb_rca
 R2
 R3
 R4
 R5
 32
-Z53 !s110 1769633867
+Z60 !s110 1769633867
 !i10b 1
-Z54 w1769633786
+Z61 w1769633786
 !i122 23
 R0
-Z55 8C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_rca.vhd
-Z56 FC:/Users/anton/Documents/EDA322/EDA322/lab1/tb_rca.vhd
+Z62 8C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_rca.vhd
+Z63 FC:/Users/anton/Documents/EDA322/EDA322/lab1/tb_rca.vhd
 l0
 L5 1
 VcO1Ii5k9jTP9B_Hln1LaQ0
 !s100 OgPOO6Y[L=<b2>VA[oLX22
-R7
-Z57 !s108 1769633867.000000
-Z58 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_rca.vhd|
-Z59 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_rca.vhd|
+R6
+Z64 !s108 1769633867.000000
+Z65 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_rca.vhd|
+Z66 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_rca.vhd|
 !i113 1
+R7
 R8
-R9
 Atb_rca_arch
 R2
 R3
@@ -454,17 +475,17 @@ R4
 R5
 DEx4 work 6 tb_rca 0 22 cO1Ii5k9jTP9B_Hln1LaQ0
 32
-R53
+R60
 !i10b 1
 !i122 23
 l28
 L8 47
 VLG8aLTb<B?ePVHS<CPkN23
 !s100 UoZ<QQoLKbi_7;CE5@>df1
-R7
-R57
-R58
-R59
+R6
+R64
+R65
+R66
 !i113 1
+R7
 R8
-R9

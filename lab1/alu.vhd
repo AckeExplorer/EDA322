@@ -15,23 +15,24 @@ entity alu is
     );
 end alu;
 
-begin architecture structural of alu is
+architecture structural of alu is
 
     signal sum: std_logic_vector(width-1 downto 0);
     signal a_xor_b: std_logic_vector(width-1 downto 0);
     signal a_and_b: std_logic_vector(width-1 downto 0);
     signal carry_in: std_logic;
-    signal inB: std_logic_vector(width-1 downto 0);
+    signal neg_b: std_logic_vector(width-1 downto 0);
 
     a_and_b <= alu_inA AND alu_inB;
     a_xor_b <= alu_inA XOR alu_inB;
-    inB <= NOT alu_inB when alu_op = "11" else alu_inB;
+    neg_b <= NOT alu_inB;
     carry_in <= '1' when alu_op = "11" else '0';
 
+begin
     add: entity work.csa
         port map (
             A => alu_inA,
-            B => inB,
+            B => alu_inB,
             O => sum,
             cin => carry_in
         );
