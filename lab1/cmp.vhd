@@ -8,3 +8,10 @@ entity cmp is
             b: in   std_logic_vector (7 downto 0);
     	    e: out  std_logic);
 end cmp;
+
+architecture dataflow of cmp is
+
+begin
+    e <= or_reduce(a XOR b);
+    
+end dataflow;
