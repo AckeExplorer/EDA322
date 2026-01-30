@@ -69,14 +69,16 @@ U2: entity work.rca(structural)
     );
 
 M1: entity work.mux(dataflow)
+    generic map(d_width => 4)
     port map(
         s => c4,
-        i0(3 downto 0) => O0,
-        i1(3 downto 0) => O1,
+        i0 => O0,
+        i1 => O1,
         o => O(7 downto 4)
     );
 
 M2: entity work.mux(dataflow)
+    generic map(d_width => 1)
     port map(
         s => c4,
         i0(0) => c0,

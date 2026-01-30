@@ -24,29 +24,34 @@ architecture tb_csa_arch of tb_csa is
 
 begin
 
-DUT: csa
-    port map (
-        A    => tb_A,
-        B    => tb_B,
-        cin  => tb_cin,
-        cout => tb_cout,
-        O    => tb_O
-    );
+    DUT: csa
+        port map (
+            A    => tb_A,
+            B    => tb_B,
+            cin  => tb_cin,
+            cout => tb_cout,
+            O    => tb_O
+        );
 
-process begin
-    -- 0 + 0 + 0
-    tb_A <= "00000000"; tb_B <= "00000000"; tb_cin <= '0'; wait for 10 ns;
-    -- 15 + 10 + 0 = 25
-    tb_A <= "00001111"; tb_B <= "00001010"; tb_cin <= '0'; wait for 10 ns;
-    -- 15 + 1 = 16
-    tb_A <= "00001111"; tb_B <= "00000000"; tb_cin <= '1'; wait for 10 ns;
-    -- 100 + 28 + 0 = 128
-    tb_A <= "01100100"; tb_B <= "00011100"; tb_cin <= '0'; wait for 10 ns;
-    -- 255 + 1 + 0 = 256 (overflow, O = 0, cout = 1)
-    tb_A <= "11111111"; tb_B <= "00000001"; tb_cin <= '0'; wait for 10 ns;
-    -- 200 + 55 + 1 = 256 (overflow, O = 0, cout = 1)
-    tb_A <= "11001000"; tb_B <= "00110111"; tb_cin <= '1'; wait for 10 ns;
+    process begin
+        -- 0 + 0 + 0
+        tb_A <= "00000000"; tb_B <= "00000000"; tb_cin <= '0'; wait for 10 ns;
+        -- 15 + 10 + 0 = 25
+        tb_A <= "00001111"; tb_B <= "00001010"; tb_cin <= '0'; wait for 10 ns;
+        -- 15 + 1 = 16
+        tb_A <= "00001111"; tb_B <= "00000000"; tb_cin <= '1'; wait for 10 ns;
+        -- 100 + 28 + 0 = 128
+        tb_A <= "01100100"; tb_B <= "00011100"; tb_cin <= '0'; wait for 10 ns;
+        -- 255 + 1 + 0 = 256 (overflow, O = 0, cout = 1)
+        tb_A <= "11111111"; tb_B <= "00000001"; tb_cin <= '0'; wait for 10 ns;
+        -- 200 + 55 + 1 = 256 (overflow, O = 0, cout = 1)
+        tb_A <= "11001000"; tb_B <= "00110111"; tb_cin <= '1'; wait for 10 ns;
+        -- 200 + 55 = 255
+        tb_A <= "11001000"; tb_B <= "00110111"; tb_cin <= '0'; wait for 10 ns;
 
-    wait;
-end process;
+        tb_A <= "01100110"; tb_B <= "00001001"; tb_cin <= '0'; wait for 10 ns;
+
+        tb_A <= "01101110"; tb_B <= "00001001"; tb_cin <= '0'; wait for 10 ns;
+        wait;
+    end process;
 end architecture tb_csa_arch;
