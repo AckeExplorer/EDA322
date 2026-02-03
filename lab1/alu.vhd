@@ -26,10 +26,20 @@ architecture structural of alu is
 
 begin
 
-    a_and_b <= alu_inA AND alu_inB;
-    a_xor_b <= alu_inA XOR alu_inB;
-    inB <= NOT alu_inB when alu_op = "11" else alu_inB;
-    carry_in <= '1' when alu_op = "11" else '0';
+    axorb: entity work.a_xor_b(dataflow)
+        port map (
+            A => alu_inA,
+            B => alu_inB,
+            O => a_xor_b
+        );
+
+    aandb: entity work.a_and_b(dataflow)
+        port map (
+            A => alu_inA,
+            B => alu_inB,
+            O => a_and_b
+        );
+        
 
     add: entity work.csa
         port map (
@@ -46,12 +56,18 @@ begin
             e => E
         );
     -- mux
-    outout <= a_xor_b when alu_op = "00" else
-                a_and_b when alu_op = "01" else
-                sum;
+    outout: entity work.mux_4_1
+        generic map (d_width => width
+        )
+        port map (
+            s => alu_op,
+            i0 => a_xor_b,
+            i1 => a_and_b,
+            i2 => sum,
+            i3 => (others => '0'),
+            o => outout
+        );
 
-    Z <= NOT OR_REDUCE(outout);
-    alu_out <= outout;
 
 
 end structural;
