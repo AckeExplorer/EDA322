@@ -40,6 +40,6 @@ begin
         );
     	end generate;
 
-cout <= carry(width);
+    cout <= carry(width);
 
 end structural;

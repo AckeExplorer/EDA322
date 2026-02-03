@@ -15,13 +15,16 @@ entity alu is
     );
 end alu;
 
-begin architecture structural of alu is
+architecture structural of alu is
 
     signal sum: std_logic_vector(width-1 downto 0);
     signal a_xor_b: std_logic_vector(width-1 downto 0);
     signal a_and_b: std_logic_vector(width-1 downto 0);
     signal carry_in: std_logic;
     signal inB: std_logic_vector(width-1 downto 0);
+    signal outout: std_logic_vector(width-1 downto 0);
+
+begin
 
     a_and_b <= alu_inA AND alu_inB;
     a_xor_b <= alu_inA XOR alu_inB;
@@ -43,11 +46,12 @@ begin architecture structural of alu is
             e => E
         );
     -- mux
-    alu_out <= a_xor_b when alu_op = "00" else
+    outout <= a_xor_b when alu_op = "00" else
                 a_and_b when alu_op = "01" else
-                sum when others;
+                sum;
 
-    Z <= NOT OR_REDUCE(alu_out);
+    Z <= NOT OR_REDUCE(outout);
+    alu_out <= outout;
 
 
 end structural;
