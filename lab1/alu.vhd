@@ -25,7 +25,6 @@ architecture structural of alu is
     signal outout: std_logic_vector(width-1 downto 0);
 
 begin
-
     axorb: entity work.a_xor_b(dataflow)
         port map (
             A => alu_inA,
@@ -43,11 +42,12 @@ begin
     bsub: entity work.b_sub(dataflow)
         port map (
             B => alu_inB,
-            sel => alu_op(0),
-            O => inB
+            s => alu_op,
+            O => inB,
+            c => carry_in
         );    
 
-    add: entity work.csa
+    add: entity work.csa(structural)
         port map (
             A => alu_inA,
             B => inB,
@@ -55,25 +55,28 @@ begin
             cin => carry_in
         );
 
-    cmp: entity work.cmp
+    cmp: entity work.cmp(dataflow)
         port map (
             a => alu_inA,
             b => alu_inB,
             e => E
         );
     -- mux
-    outout: entity work.mux_4_1
-        generic map (d_width => width
-        )
+    mux_inst: entity work.mux_4_1(dataflow)
+        generic map (d_width => width)
         port map (
             s => alu_op,
             i0 => a_xor_b,
             i1 => a_and_b,
             i2 => sum,
-            i3 => (others => '0'),
-            o => alu_out
+            i3 => sum,
+            O => alu_out
         );
 
-
+    Z_inst: entity work.z(dataflow)
+        port map (
+            alu => alu_out,
+            Z => Z
+        );
 
 end structural;
