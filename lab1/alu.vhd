@@ -7,23 +7,20 @@ use work.chacc_pkg.all;
 
 entity alu is
     generic (width: integer := 8);
-    port(
+    port (
         alu_inA, alu_inB: in std_logic_vector(width-1 downto 0);
         alu_op: in std_logic_vector(1 downto 0);
-        E,Z: out std_logic;
+        E, Z: out std_logic;
         alu_out: out std_logic_vector(width-1 downto 0)
     );
 end alu;
 
 architecture structural of alu is
-
     signal sum: std_logic_vector(width-1 downto 0);
     signal a_xor_b: std_logic_vector(width-1 downto 0);
     signal a_and_b: std_logic_vector(width-1 downto 0);
     signal carry_in: std_logic;
     signal inB: std_logic_vector(width-1 downto 0);
-    signal outout: std_logic_vector(width-1 downto 0);
-
 begin
     axorb: entity work.a_xor_b(dataflow)
         port map (
@@ -73,10 +70,10 @@ begin
             O => alu_out
         );
 
-    Z_inst: entity work.z(dataflow)
+    Z_inst: entity work.z_out(dataflow)
         port map (
             alu => alu_out,
-            Z => Z
+            z => Z
         );
 
 end structural;
