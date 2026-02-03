@@ -40,6 +40,12 @@ begin
             O => a_and_b
         );
         
+    bsub: entity work.b_sub(dataflow)
+        port map (
+            B => alu_inB,
+            sel => alu_op(0),
+            O => inB
+        );    
 
     add: entity work.csa
         port map (
@@ -65,7 +71,7 @@ begin
             i1 => a_and_b,
             i2 => sum,
             i3 => (others => '0'),
-            o => outout
+            o => alu_out
         );
 
 
