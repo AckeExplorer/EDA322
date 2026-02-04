@@ -14,6 +14,6 @@ end b_sub;
 
 architecture dataflow of b_sub is
 begin
-    O <= NOT B when ((s = "10") OR (s = "11")) else B;
-    c <= '1' when ((s = "10") OR (s = "11")) else '0';
+    O <= NOT B when s = "11"else B;
+    c <= '1' when s = "11" else '0';
 end dataflow;
