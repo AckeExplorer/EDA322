@@ -3,9 +3,11 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_misc.all;
 
 entity mux_4_1 is
-    generic (d_width: integer := 8);
+    generic (d_width: integer := 8;
+            s_width: integer := 2
+    );
     port (
-        s : in std_logic_vector(1 downto 0);
+        s : in std_logic_vector(s_width-1 downto 0);
         i0 : in std_logic_vector(d_width-1 downto 0);
         i1 : in std_logic_vector(d_width-1 downto 0);
         i2 : in std_logic_vector(d_width-1 downto 0);

@@ -14,3 +14,5 @@ entity proc_bus is
         busOut     : out std_logic_vector(7 downto 0)
     );
 end proc_bus;
+
+architecture structural of proc_bus is
