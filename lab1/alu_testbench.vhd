@@ -151,6 +151,7 @@ begin
 
         report "Test passed";
         assert (false) report "Simulation Ended" severity failure;
-        wait;
+        
+
     end process;
 end architecture;

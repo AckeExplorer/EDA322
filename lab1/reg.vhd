@@ -10,3 +10,10 @@ entity reg is
         q: out std_logic_vector(width-1 downto 0)
     );
 end entity reg;
+
+begin dataflow of reg is
+    q <= (others => '0') when rstn = '0' else 
+        d when en = '1' AND rising_edge(clk) else
+        q;
+end dataflow;
+    
