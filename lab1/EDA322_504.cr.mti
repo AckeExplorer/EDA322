@@ -37,7 +37,15 @@ vcom -reportprogress 300 -work work -2002 -explicit C:/Users/anton/Documents/EDA
 ** Error: C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_bus.vhd(18): near "EOF": syntax error
 End time: 10:31:20 on Feb 04,2026, Elapsed time: 0:00:01
 
-} {11.0 12.0} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/fa.vhd {1 {vcom -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/fa.vhd
+} {11.0 12.0} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/reg.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/reg.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity reg
+-- Compiling architecture behavioral of reg
+
+} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/fa.vhd {1 {vcom -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/fa.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 Start time: 10:31:18 on Feb 04,2026
 vcom -reportprogress 300 -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/fa.vhd 
@@ -133,18 +141,6 @@ vcom -reportprogress 300 -work work -2002 -explicit C:/Users/anton/Documents/EDA
 -- Loading entity fa
 End time: 10:31:18 on Feb 04,2026, Elapsed time: 0:00:00
 
-} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd {1 {vcom -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-Start time: 10:31:18 on Feb 04,2026
-vcom -reportprogress 300 -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd 
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Loading package chacc_pkg
--- Compiling entity proc_controller
-End time: 10:31:18 on Feb 04,2026, Elapsed time: 0:00:00
-
 } {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/csa.vhd {1 {vcom -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/csa.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 Start time: 10:31:17 on Feb 04,2026
@@ -162,6 +158,18 @@ vcom -reportprogress 300 -work work -2002 -explicit C:/Users/anton/Documents/EDA
 -- Loading entity mux
 End time: 10:31:17 on Feb 04,2026, Elapsed time: 0:00:00
 
+} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd {1 {vcom -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+Start time: 10:31:18 on Feb 04,2026
+vcom -reportprogress 300 -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd 
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package chacc_pkg
+-- Compiling entity proc_controller
+End time: 10:31:18 on Feb 04,2026, Elapsed time: 0:00:00
+
 } {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/EDA322_processor.vhd {1 {vcom -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/EDA322_processor.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 Start time: 10:31:17 on Feb 04,2026
@@ -172,19 +180,6 @@ vcom -reportprogress 300 -work work -2002 -explicit C:/Users/anton/Documents/EDA
 -- Loading package NUMERIC_STD
 -- Compiling entity EDA322_processor
 End time: 10:31:17 on Feb 04,2026, Elapsed time: 0:00:00
-
-} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/z_out.vhd {1 {vcom -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/z_out.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-Start time: 10:31:19 on Feb 04,2026
-vcom -reportprogress 300 -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/z_out.vhd 
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package ATTRIBUTES
--- Loading package std_logic_misc
--- Compiling entity z_out
--- Compiling architecture dataflow of z_out
-End time: 10:31:19 on Feb 04,2026, Elapsed time: 0:00:00
 
 } {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/alu_testbench.vhd {1 {vcom -work work -2008 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/alu_testbench.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
@@ -201,31 +196,18 @@ vcom -reportprogress 300 -work work -2008 -explicit C:/Users/anton/Documents/EDA
 -- Compiling architecture BEHAVIORAL of alu_testbench
 End time: 10:31:19 on Feb 04,2026, Elapsed time: 0:00:00
 
-} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd {1 {vcom -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd
+} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/z_out.vhd {1 {vcom -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/z_out.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-Start time: 10:31:18 on Feb 04,2026
-vcom -reportprogress 300 -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd 
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Loading package chacc_pkg
--- Compiling entity mux
--- Compiling architecture dataflow of mux
-End time: 10:31:18 on Feb 04,2026, Elapsed time: 0:00:00
-
-} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/a_xor_b.vhd {1 {vcom -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/a_xor_b.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-Start time: 10:31:17 on Feb 04,2026
-vcom -reportprogress 300 -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/a_xor_b.vhd 
+Start time: 10:31:19 on Feb 04,2026
+vcom -reportprogress 300 -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/z_out.vhd 
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Loading package ATTRIBUTES
 -- Loading package std_logic_misc
--- Compiling entity a_xor_b
--- Compiling architecture dataflow of a_xor_b
-End time: 10:31:17 on Feb 04,2026, Elapsed time: 0:00:00
+-- Compiling entity z_out
+-- Compiling architecture dataflow of z_out
+End time: 10:31:19 on Feb 04,2026, Elapsed time: 0:00:00
 
 } {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/alu.vhd {1 {vcom -work work -2008 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/alu.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
@@ -247,5 +229,31 @@ vcom -reportprogress 300 -work work -2008 -explicit C:/Users/anton/Documents/EDA
 -- Loading entity mux_4_1
 -- Loading entity z_out
 End time: 10:31:19 on Feb 04,2026, Elapsed time: 0:00:00
+
+} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/a_xor_b.vhd {1 {vcom -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/a_xor_b.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+Start time: 10:31:17 on Feb 04,2026
+vcom -reportprogress 300 -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/a_xor_b.vhd 
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ATTRIBUTES
+-- Loading package std_logic_misc
+-- Compiling entity a_xor_b
+-- Compiling architecture dataflow of a_xor_b
+End time: 10:31:17 on Feb 04,2026, Elapsed time: 0:00:00
+
+} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd {1 {vcom -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+Start time: 10:31:18 on Feb 04,2026
+vcom -reportprogress 300 -work work -2002 -explicit C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd 
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package chacc_pkg
+-- Compiling entity mux
+-- Compiling architecture dataflow of mux
+End time: 10:31:18 on Feb 04,2026, Elapsed time: 0:00:00
 
 } {} {}}
