@@ -46,11 +46,11 @@ begin
         tb_rstn <= '0'; wait for 50 ns; 
         tb_rstn <= '1'; wait for 50 ns;
 
-        tb_en <= '1'; tb_d <= "10101010"; ; wait for 50 ns;
+        tb_en <= '1'; tb_d <= "10101010"; wait for 50 ns;
        
-        tb_en <= '0'; tb_d <= "01010101"; ; wait for 50 ns;
+        tb_en <= '0'; tb_d <= "01010101"; wait for 50 ns;
 
-        tb_rstn <= '0'; ; wait for 50 ns;
+        tb_rstn <= '0'; wait for 50 ns;
 
         tb_en <= '1'; wait for 50 ns;
 
