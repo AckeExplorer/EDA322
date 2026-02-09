@@ -45,7 +45,8 @@ begin
     POC : process(clk)
         mem <= init_memory_wfile(INIT_FILE);
         reg : for i in 0 to ADDR_WIDTH-1 generate
-            regs: entity.work.reg(dataflow)
+            regs: entity.work.reg(behavioral)
+                generic map(width => DATA_WIDTH)
                 port map(
                     clk => clk,
                     rstn => '0',
