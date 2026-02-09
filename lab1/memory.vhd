@@ -27,19 +27,35 @@ architecture behavioral of memory is
     signal mem : MEMORY_ARRAY;
     impure function init_memory_wfile(mif_file_name : in string) return
         MEMORY_ARRAY is
-        file mif_file : text open read_mode is mif_file_name;
-        variable mif_line : line;
-        variable temp_bv : bit_vector(DATA_WIDTH-1 downto 0);
-        variable temp_mem : MEMORY_ARRAY;
+            file mif_file : text open read_mode is mif_file_name;
+            variable mif_line : line;
+            variable temp_bv : bit_vector(DATA_WIDTH-1 downto 0);
+            variable temp_mem : MEMORY_ARRAY;
         begin
-        for i in MEMORY_ARRAY'range loop
-        readline(mif_file, mif_line);
-        read(mif_line, temp_bv);
-        temp_mem(i) := to_stdlogicvector(temp_bv);
+            for i in MEMORY_ARRAY'range loop
+            readline(mif_file, mif_line);
+            read(mif_line, temp_bv);
+            temp_mem(i) := to_stdlogicvector(temp_bv);
         end loop;
         return temp_mem;
     end function;
 
-    begin
+
+begin
+    POC : process(clk)
         mem <= init_memory_wfile(INIT_FILE);
+        reg : for i in 0 to ADDR_WIDTH-1 generate
+            regs: entity.work.reg(dataflow)
+                port map(
+                    clk => clk,
+                    rstn => '0',
+                    en => writeEn,
+                    d => dataIn,
+                    q => mem(i)
+                );
+        end generate;
+
+        dataOut <= mem(to_integer(unsigned(address))) when readEn = '1' and rise_edge(clk);
+    end process;
+end behavioral;
     
