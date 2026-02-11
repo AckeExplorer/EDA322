@@ -16,3 +16,11 @@ entity proc_bus is
 end proc_bus;
 
 architecture structural of proc_bus is
+
+    begin
+    busOut <= imDataOut when busSel = "0001" else
+              dmDataOut when busSel = "0010" else
+              accOut when busSel = "0100" else
+              extIn when busSel = "1000" else
+              (others => 'Z');
+end structural;
