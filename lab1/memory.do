@@ -1,3 +1,4 @@
+run 10 ns
 force clk 0 0, 1 50ns -repeat 100ns
 run 10 ns
 force dataIn 8'b11110000
