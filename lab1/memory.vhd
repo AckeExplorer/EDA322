@@ -47,6 +47,7 @@ architecture behavioral of memory is
         end loop;
         return temp_mem;
     end function;
+    
     signal mem : MEMORY_ARRAY;
     signal writeEn_reg: std_logic_vector(ADDR_WIDTH-1 downto 0);
 
