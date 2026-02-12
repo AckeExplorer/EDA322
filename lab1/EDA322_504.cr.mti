@@ -18,7 +18,7 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling entity mux_4_1
 -- Compiling architecture dataflow of mux_4_1
 
-} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_bus.vhd {0 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_bus.vhd
+} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_bus.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_bus.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -26,9 +26,8 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading package chacc_pkg
 -- Compiling entity proc_bus
 -- Compiling architecture structural of proc_bus
-** Error: C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_bus.vhd(18): near "EOF": syntax error
 
-} {9.0 10.0} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/reg.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/reg.vhd
+} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/reg.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/reg.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -53,6 +52,16 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading package std_logic_misc
 -- Compiling entity cmp
 -- Compiling architecture dataflow of cmp
+
+} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/memory.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/memory.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package chacc_pkg
+-- Compiling entity memory
+-- Compiling architecture behavioral of memory
 
 } {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/b_sub.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/b_sub.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
@@ -113,6 +122,15 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling architecture structural of rca
 -- Loading entity fa
 
+} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package chacc_pkg
+-- Compiling entity proc_controller
+
 } {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/csa.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/csa.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
@@ -127,15 +145,6 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading package chacc_pkg
 -- Loading entity mux
 
-} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Loading package chacc_pkg
--- Compiling entity proc_controller
-
 } {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/EDA322_processor.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/EDA322_processor.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
@@ -143,16 +152,6 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading package std_logic_1164
 -- Loading package NUMERIC_STD
 -- Compiling entity EDA322_processor
-
-} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/z_out.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/z_out.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package ATTRIBUTES
--- Loading package std_logic_misc
--- Compiling entity z_out
--- Compiling architecture dataflow of z_out
 
 } {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/alu_testbench.vhd {1 {vcom -work work -2008 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/alu_testbench.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
@@ -165,6 +164,36 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading package chacc_pkg
 -- Compiling entity alu_testbench
 -- Compiling architecture BEHAVIORAL of alu_testbench
+
+} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/z_out.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/z_out.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ATTRIBUTES
+-- Loading package std_logic_misc
+-- Compiling entity z_out
+-- Compiling architecture dataflow of z_out
+
+} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package chacc_pkg
+-- Compiling entity mux
+-- Compiling architecture dataflow of mux
+
+} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/a_xor_b.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/a_xor_b.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ATTRIBUTES
+-- Loading package std_logic_misc
+-- Compiling entity a_xor_b
+-- Compiling architecture dataflow of a_xor_b
 
 } {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/alu.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/alu.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
@@ -183,26 +212,6 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading entity cmp
 -- Loading entity mux_4_1
 -- Loading entity z_out
-
-} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/a_xor_b.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/a_xor_b.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package ATTRIBUTES
--- Loading package std_logic_misc
--- Compiling entity a_xor_b
--- Compiling architecture dataflow of a_xor_b
-
-} {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/mux.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Loading package chacc_pkg
--- Compiling entity mux
--- Compiling architecture dataflow of mux
 
 } {} {}} C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_reg.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/anton/Documents/EDA322/EDA322/lab1/tb_reg.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020

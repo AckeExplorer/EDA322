@@ -27,7 +27,6 @@ architecture tb_memory_arch of tb_memory is
             dataOut : out std_logic_vector(DATA_WIDTH-1 downto 0)
         );
     end component;
-
     signal tb_clk : std_logic := '0';
     signal tb_readEn : std_logic := '0';
     signal tb_writeEn : std_logic := '0';
@@ -61,11 +60,17 @@ begin
     
     process
     begin
-        tb_address <= "00000000"; tb_readEn <= '1'; tb_dataIn <= "11110000"; wait for 50 ns;
+        tb_address <= "00000000"; tb_readEn <= '1'; wait for 50 ns;
+        tb_readEn <= '0'; tb_dataIn <= "11110000"; wait for 50 ns;
         tb_writeEn <= '1'; wait for 50 ns;
         tb_writeEn <= '0'; wait for 50 ns;
-        tb_address <= "00000001"; tb_dataIn <= "00001111"; wait for 50 ns;
-
+        tb_readEn <= '1'; wait for 50 ns;
+        tb_readEn <= '0'; tb_address <= "00000001";  wait for 50 ns;
+        tb_readEn <= '1'; wait for 50 ns;
+        tb_readEn <= '0'; wait for 50 ns;
+        tb_dataIn <= "10101010"; tb_writeEn <= '1'; wait for 50 ns;
+        tb_writeEn <= '0'; wait for 50 ns;
+        tb_readEn <= '1'; wait for 50 ns;
 
         -- Finish simulation
         wait;
