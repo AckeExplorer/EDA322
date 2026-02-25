@@ -34,14 +34,34 @@ architecture structural of EDA322_processor is
     signal aluOp : std_logic_vector(1 downto 0);
     signal acc, acc_in : std_logic_vector(7 downto 0);
     signal busOut : std_logic_vector(7 downto 0);
-    signal extOut : std_logic_vector(7 downto 0);
-    signal inReady, outValid, acc_sel, accLd, pcLd : std_logic;
+    signal acc_sel, accLd, pcLd, flagLd : std_logic;
     signal busSel : std_logic_vector(3 downto 0);
     signal pc_b_in : std_logic_vector(7 downto 0);
     signal pc_sel, imRead, dmRead, dmWrite, e_flag, z_flag, e_flag_out, z_flag_out : std_logic;
     signal bus_sel: std_logic_vector(3 downto 0);
+    signal e_flagV, z_flagV, e_flagVout, z_flagVout : std_logic_vector(0 downto 0);
 
 begin
+    controller: entity work.proc_controller(behavioral)
+        port map(clk => clk,
+        resetn => resetn,
+        master_load_enable => master_load_enable,
+        opcode => imDataOut(11 downto 8),
+        inValid => inValid,
+        outReady => outReady,
+        e_flag => e_flag_out,
+        z_flag => z_flag_out,
+        busSel => bus_sel,
+        aluOp => aluOp,
+        accSel => acc_sel,
+        accLd => accLd,
+        pcLd => pcLd,
+        flagLd => flagLd,
+        pcSel => pc_sel,
+        imRead => imRead,
+        dmRead => dmRead,
+        dmWrite => dmWrite);
+
     pc_b_in <= not ('0' & busOut(6 downto 0)) when busOut(7) else '0' & busOut(6 downto 0);
 
     pc_inc: entity work.csa(structural)
@@ -50,36 +70,42 @@ begin
         cin => '1',
         O => pc_incr_out);
     pc_jump_address: entity work.csa(structural)
-        port map(A => pc,
+        port map(A => pc_b_in,
         B => '0' & busOut(6 downto 0),
-        cin => '1',
+        cin => busOut(7),
         O => pc_jump_addr);
 
-    pc_next <= pc_jump_addr when pc_sel = '1' else pc_incr_out;
+    next_pc <= pc_jump_addr when pc_sel = '1' else pc_incr_out;
     pc2seg <= pc_out;
 
     alu: entity work.alu(structural)
-        port map(a => acc,
-        b => busOut,
+        port map(alu_inA => acc,
+        alu_inB => busOut,
         alu_op =>  aluOp,
         alu_out => aluOut,
         E => e_flag,
         Z => z_flag);
+    aluOut2seg <= aluOut;
+    e_flagV(0) <= e_flag;
+    z_flagV(0) <= z_flag;
 
     e_reg: entity work.reg(behavioral)
         generic map(width => 1)
         port map(clk => clk,
         rstn => resetn,
         en => flagLd,
-        d => e_flag,
-        q => e_flag_out);
+        d => e_flagV,
+        q => e_flagVout);
     z_reg: entity work.reg(behavioral)
         generic map(width => 1)
         port map(clk => clk,
         rstn => resetn,
         en => flagLd,
-        d => z_flag,
-        q => z_flag_out);
+        d => z_flagV,
+        q => z_flagVout);
+
+    e_flag_out <= e_flagVout(0);
+    z_flag_out <= z_flagVout(0);
 
     acc_in <= aluOut when acc_sel = '0' else busOut;
 
@@ -123,11 +149,17 @@ begin
         address => busOut,
         dataIn => acc,
         dataOut => dmDataOut);
+    dmDataOut2seg <= dmDataOut;
     
     proc_bus: entity work.proc_bus(structural)
         port map(busSel => bus_sel,
         imDataOut => imDataOut(7 downto 0),
         dmDataOut => dmDataOut,
-        acc => acc,
+        accOut => acc,
         extIn => extIn,
         busOut => busOut);
+    
+    busOut2seg <= busOut;
+
+
+end structural;

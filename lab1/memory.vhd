@@ -22,7 +22,7 @@ end entity;
 
 architecture behavioral of memory is
 
-    type MEMORY_ARRAY is array (ADDR_WIDTH - 1 downto 0) of std_logic_vector(DATA_WIDTH-1 downto 0);
+    type MEMORY_ARRAY is array (0 to 2**ADDR_WIDTH - 1) of std_logic_vector(DATA_WIDTH-1 downto 0);
 
     impure function init_memory_wfile(mif_file_name : in string) return
         MEMORY_ARRAY is

@@ -60,6 +60,8 @@ begin
 
         tb_busSel <= "1000";
         wait for 10 ns;
+
+        tb_busSel <= "1001";
        
     end process;
 end tb_proc_bus_arch;

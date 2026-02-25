@@ -37,6 +37,7 @@ architecture behavioral of proc_controller is
 
     -- local decoded alias
     signal op : op_t;
+    signal out_ready : std_logic;
 
     signal mImRead : std_logic;
     signal mDmRead : std_logic;
@@ -121,10 +122,10 @@ begin
                     when O_LBI =>
                         -- immediate / move from IM to ACC
                         next_state <= S_DECODE2;
-                    when O_ADD | O_SUB | O_AND | O_XOR | O_CMP | LB | LB1 =>
+                    when O_ADD | O_SUB | O_AND | O_XOR | O_CMP | O_LB =>
                         mDmRead <= '1';
                         next_state <= S_EXEC;
-                    when O_SB1 =>
+                    when O_SBI =>
                         mDmRead <= '1';
                         next_state <= S_ME;
                     when others =>
@@ -154,15 +155,15 @@ begin
                         mAccLd <= '1';
                         accSel <= '1';
                         next_state <= S_FETCH;
-                    when J =>
+                    when O_J =>
                         mPcLd <= '1';
                         pcSel <= '1';
                         next_state <= S_FETCH;
-                    when JE =>
+                    when O_JE =>
                         mPcLd <= e_flag;
                         pcSel <= '1';
                         next_state <= S_FETCH;
-                    when JNZ =>
+                    when O_JNZ =>
                         mPcLd <= not z_flag;
                         pcSel <= '1';
                         next_state <= S_FETCH;
@@ -214,7 +215,7 @@ begin
                         busSel <= B_IMEM;
                         mDmWrite <= '1';
                         next_state <= S_FETCH;
-                    when O_SB1 =>
+                    when O_SBI =>
                         busSel <= B_DMEM;
                         mDmWrite <= '1';
                         next_state <= S_FETCH;
