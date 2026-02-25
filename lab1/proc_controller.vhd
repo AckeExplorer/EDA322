@@ -110,7 +110,7 @@ begin
             when S_DECODE =>
                 -- Default: advance PC
                 imRead <= '0';
-                pcLd <= '0';
+                mPcLd <= '0';
 
                 -- decode opcode and choose path
                 case op is
@@ -155,15 +155,15 @@ begin
                         mAccLd <= '1';
                         accSel <= '1';
                         next_state <= S_FETCH;
-                    when J =>
+                    when O_J =>
                         mPcLd <= '1';
                         pcSel <= '1';
                         next_state <= S_FETCH;
-                    when JE =>
+                    when O_JE =>
                         mPcLd <= e_flag;
                         pcSel <= '1';
                         next_state <= S_FETCH;
-                    when JNZ =>
+                    when O_JNZ =>
                         mPcLd <= not z_flag;
                         pcSel <= '1';
                         next_state <= S_FETCH;
