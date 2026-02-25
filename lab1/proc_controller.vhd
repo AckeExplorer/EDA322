@@ -147,7 +147,7 @@ begin
                         end if;
                     when O_OUT =>
                         mOutValid <= '1';
-                        if out_ready = '1' then
+                        if outReady = '1' then
                             next_state <= S_FETCH;
                         end if;
                     when O_MOV =>
