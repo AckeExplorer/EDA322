@@ -94,24 +94,24 @@ begin
                 -- defaults
                 busSel <= B_IMEM;
                 pcSel <= '0';
-                dmRead <= '0';
-                dmWrite <= '0';
+                mDmRead <= '0';
+                mDmWrite <= '0';
                 aluOp <= A_XOR;
-                flagLd <= '0';
+                mFlagLd <= '0';
                 accSel <= '0';
-                accLd <= '0';
-                inReady <= '0';
-                outValid <= '0';
+                mAccLd <= '0';
+                mInReady <= '0';
+                mOutValid <= '0';
                 -- request instruction
                 imRead <= '1';
-                pcLd <= '1';
+                mPcLd <= '1';
                 -- after fetch, go decode
                 next_state <= S_DECODE;
 
             when S_DECODE =>
                 -- Default: advance PC
                 imRead <= '0';
-                pcLd <= '0';
+                mPcLd <= '0';
 
                 -- decode opcode and choose path
                 case op is
@@ -122,7 +122,7 @@ begin
                     when O_LBI =>
                         -- immediate / move from IM to ACC
                         next_state <= S_DECODE2;
-                    when O_ADD | O_SUB | O_AND | O_XOR | O_CMP | O_LB =>
+                    when O_ADD | O_SUB | O_AND | O_XOR | O_CMP | O_LB | O_LB1 =>
                         mDmRead <= '1';
                         next_state <= S_EXEC;
                     when O_SBI =>
@@ -138,16 +138,17 @@ begin
                 next_state <= S_EXEC;
 
             when S_EXEC =>
+                mDmRead <= 0';
                 case op is
                     when O_IN =>
-                        inReady <= '1';
+                        mInReady <= '1';
                         if inValid = '1' then
                             mAccLd <= '1';
                             next_state <= S_FETCH;
                         end if;
                     when O_OUT =>
-                        outValid <= '1';
-                        if out_ready = '1' then
+                        mOutValid <= '1';
+                        if outReady = '1' then
                             next_state <= S_FETCH;
                         end if;
                     when O_MOV =>
