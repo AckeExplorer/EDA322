@@ -37,6 +37,15 @@ architecture behavioral of proc_controller is
 
     -- local decoded alias
     signal op : op_t;
+
+    signal mImRead : std_logic;
+    signal mDmRead : std_logic;
+    signal mDmWrite : std_logic;
+    signal mPcLd : std_logic;
+    signal mFlagLd : std_logic;
+    signal mAccLd : std_logic;
+    signal mInReady : std_logic;
+    signal mOutValid : std_logic;
 begin
 
     op <= opcode;
@@ -46,7 +55,7 @@ begin
     begin
         if resetn = '0' then
             state <= S_FETCH;
-        elsif rising_edge(clk) then
+        elsif rising_edge(clk) and master_load_enable = '1' then
             state <= next_state;
         end if;
     end process;
@@ -54,6 +63,16 @@ begin
     -- Next-state logic and outputs
     process(state, op, e_flag, z_flag, inValid, outReady)
     begin
+        if master_load_enable = '1' then
+            imRead <= mImRead;
+            dmRead <= mDmRead;
+            dmWrite <= mDmWrite;
+            pcLd <= mPcLd;
+            flagLd <= mFlagLd;
+            accLd <= mAccLd;
+            inReady <= mInReady;
+            outValid <= mOutValid;
+        end if;
         -- defaults
         busSel <= B_IMEM;
         pcSel <= '0';
@@ -103,17 +122,17 @@ begin
                         -- immediate / move from IM to ACC
                         next_state <= S_DECODE2;
                     when O_ADD | O_SUB | O_AND | O_XOR | O_CMP | LB | LB1 =>
-                        dmRead <= '1';
+                        mDmRead <= '1';
                         next_state <= S_EXEC;
                     when O_SB1 =>
-                        dmRead <= '1';
+                        mDmRead <= '1';
                         next_state <= S_ME;
                     when others =>
                         next_state <= S_EXEC;
 
                 end case;
             when S_DECODE2 =>
-                -- This state is only for LBI, which needs to load from DMEM (not IMEM) to get the immediate value, then load to ACC
+                -- This state is only for LBI, which needs to load from DMEM  to get the immediate value, then load to ACC
                 busSel <= B_DMEM;
                 next_state <= S_EXEC;
 
@@ -122,7 +141,7 @@ begin
                     when O_IN =>
                         inReady <= '1';
                         if inValid = '1' then
-                            accLd <= '1';
+                            mAccLd <= '1';
                             next_state <= S_FETCH;
                         end if;
                     when O_OUT =>
@@ -132,104 +151,76 @@ begin
                         end if;
                     when O_MOV =>
                         busSel <= B_IMEM;
-                        accLd <= '1';
+                        mAccLd <= '1';
                         accSel <= '1';
                         next_state <= S_FETCH;
                     when J =>
-                        pcLd <= '1';
+                        mPcLd <= '1';
                         pcSel <= '1';
                         next_state <= S_FETCH;
                     when JE =>
-                        pcLd <= e_flag;
+                        mPcLd <= e_flag;
                         pcSel <= '1';
                         next_state <= S_FETCH;
                     when JNZ =>
-                        pcLd <= not z_flag;
+                        mPcLd <= not z_flag;
                         pcSel <= '1';
                         next_state <= S_FETCH;
                     when O_XOR =>
                         aluOp <= A_XOR;
-                        flagLd <= '1';
+                        mFlagLd <= '1';
                         busSel <= B_DMEM;
                         accSel <= '0';
-                        accLd <= '1';
+                        mAccLd <= '1';
                         next_state <= S_FETCH;
                     when O_AND =>
                         aluOp <= A_AND;
                         busSel <= B_DMEM;
-                        flagLd <= '1';
+                        mFlagLd <= '1';
                         accSel <= '0';
-                        accLd <= '1';
+                        mAccLd <= '1';
                         next_state <= S_FETCH;
                     when O_ADD =>
                         aluOp <= A_ADD;
                         busSel <= B_DMEM;
-                        flagLd <= '1';
+                        mFlagLd <= '1';
                         accSel <= '0';
-                        accLd <= '1';
+                        mAccLd <= '1';
                         next_state <= S_FETCH;
                     when O_SUB =>
                         aluOp <= A_SUB;
                         busSel <= B_DMEM;
-                        flagLd <= '1';
+                        mFlagLd <= '1';
                         accSel <= '0';
-                        accLd <= '1';
+                        mAccLd <= '1';
                         next_state <= S_FETCH;
                     when O_CMP =>
-                        flagLd <= '1';
+                        mFlagLd <= '1';
                         busSel <= B_DMEM;
                         next_state <= S_FETCH;
                     when O_LB | O_LBI =>
                         busSel <= B_DMEM;
-                        accLd <= '1';
+                        mAccLd <= '1';
                         accSel <= '1';
                         next_state <= S_FETCH;
-                        
-                    when O_IN =>
-                        -- request external data; if valid load, else wait
-                        inReady <= '1';
-                        if inValid = '1' then
-                            accLd <= '1';
-                            next_state <= S_FETCH;
-                        else
-                            next_state <= S_WAIT_IN;
-                        end if;
-
-                    when O_OUT =>
-                        -- present ACC/Bus to external
-                        outValid <= '1';
-                        next_state <= S_WAIT_OUT;
-
-                    when O_J =>
-                        pcSel <= '1';
-                        pcLd <= '1';
-                        next_state <= S_FETCH;
-
-                    when O_JE =>
-                        pcSel <= ( '1' when e_flag = '1' else '0' );
-                        pcLd <= '1';
-                        next_state <= S_FETCH;
-
-                    when O_JNZ =>
-                        pcSel <= ( '1' when z_flag = '0' else '0' );
-                        pcLd <= '1';
-                        next_state <= S_FETCH;
-
-                    when O_LB =>
-                        -- read from data memory, then writeback
-                        dmRead <= '1';
-                        next_state <= S_DM_WB;
-
-                    when O_SB | O_SBI =>
-                        -- store to data memory (one cycle write)
-                        dmWrite <= '1';
-                        next_state <= S_FETCH;
-
                     when others =>
                         next_state <= S_FETCH;
                     
                 end case;
-
+                
+            when S_ME =>
+                case op is
+                    when O_SB =>
+                        busSel <= B_IMEM;
+                        mDmWrite <= '1';
+                        next_state <= S_FETCH;
+                    when O_SB1 =>
+                        busSel <= B_DMEM;
+                        mDmWrite <= '1';
+                        next_state <= S_FETCH;
+                    when others =>
+                        next_state <= S_FETCH;
+                end case;
             when others =>
                 next_state <= S_FETCH;
         end case;
