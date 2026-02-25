@@ -37,16 +37,7 @@ architecture behavioral of proc_controller is
 
     -- local decoded alias
     signal op : op_t;
-    signal out_ready : std_logic;
 
-    signal mImRead : std_logic;
-    signal mDmRead : std_logic;
-    signal mDmWrite : std_logic;
-    signal mPcLd : std_logic;
-    signal mFlagLd : std_logic;
-    signal mAccLd : std_logic;
-    signal mInReady : std_logic;
-    signal mOutValid : std_logic;
 begin
 
     op <= opcode;
@@ -64,18 +55,9 @@ begin
     -- Next-state logic and outputs
     process(state, op, e_flag, z_flag, inValid, outReady)
     begin
-        if master_load_enable = '1' then
-            imRead <= mImRead;
-            dmRead <= mDmRead;
-            dmWrite <= mDmWrite;
-            pcLd <= mPcLd;
-            flagLd <= mFlagLd;
-            accLd <= mAccLd;
-            inReady <= mInReady;
-            outValid <= mOutValid;
-        end if;
+        
         -- defaults
-        busSel <= B_IMEM;
+        busSel <= "0000";
         pcSel <= '0';
         pcLd <= '0';
         imRead <= '0';
@@ -92,26 +74,26 @@ begin
         case state is
             when S_FETCH =>
                 -- defaults
-                busSel <= B_IMEM;
+                busSel <= "0000";
                 pcSel <= '0';
-                mDmRead <= '0';
-                mDmWrite <= '0';
+                DmRead <= '0';
+                dmWrite <= '0';
                 aluOp <= A_XOR;
-                mFlagLd <= '0';
+                flagLd <= '0';
                 accSel <= '0';
-                mAccLd <= '0';
-                mInReady <= '0';
-                mOutValid <= '0';
+                accLd <= '0';
+                inReady <= '0';
+                outValid <= '0';
                 -- request instruction
                 imRead <= '1';
-                mPcLd <= '1';
+                pcLd <= '1';
                 -- after fetch, go decode
                 next_state <= S_DECODE;
 
             when S_DECODE =>
                 -- Default: advance PC
                 imRead <= '0';
-                mPcLd <= '0';
+                pcLd <= '0';
 
                 -- decode opcode and choose path
                 case op is
@@ -121,12 +103,13 @@ begin
 
                     when O_LBI =>
                         -- immediate / move from IM to ACC
+                        DmRead <= '1';
                         next_state <= S_DECODE2;
-                    when O_ADD | O_SUB | O_AND | O_XOR | O_CMP | O_LB | O_LB1 =>
-                        mDmRead <= '1';
+                    when O_ADD | O_SUB | O_AND | O_XOR | O_CMP | O_LB =>
+                        DmRead <= '1';
                         next_state <= S_EXEC;
                     when O_SBI =>
-                        mDmRead <= '1';
+                        DmRead <= '1';
                         next_state <= S_ME;
                     when others =>
                         next_state <= S_EXEC;
@@ -138,71 +121,71 @@ begin
                 next_state <= S_EXEC;
 
             when S_EXEC =>
-                mDmRead <= 0';
+                DmRead <= '0';
                 case op is
                     when O_IN =>
-                        mInReady <= '1';
+                        inReady <= '1';
                         if inValid = '1' then
-                            mAccLd <= '1';
+                            accLd <= '1';
                             next_state <= S_FETCH;
                         end if;
                     when O_OUT =>
-                        mOutValid <= '1';
+                        outValid <= '1';
                         if outReady = '1' then
                             next_state <= S_FETCH;
                         end if;
                     when O_MOV =>
                         busSel <= B_IMEM;
-                        mAccLd <= '1';
+                        accLd <= '1';
                         accSel <= '1';
                         next_state <= S_FETCH;
                     when O_J =>
-                        mPcLd <= '1';
+                        pcLd <= '1';
                         pcSel <= '1';
                         next_state <= S_FETCH;
                     when O_JE =>
-                        mPcLd <= e_flag;
+                        pcLd <= e_flag;
                         pcSel <= '1';
                         next_state <= S_FETCH;
                     when O_JNZ =>
-                        mPcLd <= not z_flag;
+                        pcLd <= not z_flag;
                         pcSel <= '1';
                         next_state <= S_FETCH;
                     when O_XOR =>
                         aluOp <= A_XOR;
-                        mFlagLd <= '1';
+                        flagLd <= '1';
                         busSel <= B_DMEM;
                         accSel <= '0';
-                        mAccLd <= '1';
+                        accLd <= '1';
                         next_state <= S_FETCH;
                     when O_AND =>
                         aluOp <= A_AND;
                         busSel <= B_DMEM;
-                        mFlagLd <= '1';
+                        flagLd <= '1';
                         accSel <= '0';
-                        mAccLd <= '1';
+                        accLd <= '1';
                         next_state <= S_FETCH;
                     when O_ADD =>
                         aluOp <= A_ADD;
                         busSel <= B_DMEM;
-                        mFlagLd <= '1';
+                        flagLd <= '1';
                         accSel <= '0';
-                        mAccLd <= '1';
+                        accLd <= '1';
                         next_state <= S_FETCH;
                     when O_SUB =>
                         aluOp <= A_SUB;
                         busSel <= B_DMEM;
-                        mFlagLd <= '1';
+                        flagLd <= '1';
                         accSel <= '0';
-                        mAccLd <= '1';
+                        accLd <= '1';
                         next_state <= S_FETCH;
                     when O_CMP =>
-                        mFlagLd <= '1';
+                        flagLd <= '1';
                         busSel <= B_DMEM;
                         next_state <= S_FETCH;
                     when O_LB | O_LBI =>
                         busSel <= B_DMEM;
-                        mAccLd <= '1';
+                        accLd <= '1';
                         accSel <= '1';
                         next_state <= S_FETCH;
                     when others =>
@@ -214,11 +197,11 @@ begin
                 case op is
                     when O_SB =>
                         busSel <= B_IMEM;
-                        mDmWrite <= '1';
+                        DmWrite <= '1';
                         next_state <= S_FETCH;
                     when O_SBI =>
                         busSel <= B_DMEM;
-                        mDmWrite <= '1';
+                        DmWrite <= '1';
                         next_state <= S_FETCH;
                     when others =>
                         next_state <= S_FETCH;

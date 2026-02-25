@@ -734,12 +734,12 @@ R111
 R13
 R14
 Eproc_controller
-Z112 w1772054930
+Z112 w1772057559
 R24
 R40
 R4
 R5
-!i122 550
+!i122 560
 R0
 Z113 8C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd
 Z114 FC:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd
@@ -749,11 +749,11 @@ VoHa>MTIHg89cj:<mCMkQM3
 !s100 78K`5`^lNS^H:n<1mmdPg3
 R8
 32
-Z115 !s110 1772054936
+Z115 !s110 1772057597
 !i10b 1
-Z116 !s108 1772054936.000000
+Z116 !s108 1772057597.000000
 Z117 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd|
-!s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd|
+Z118 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd|
 !i113 1
 R13
 R14
@@ -763,18 +763,18 @@ R40
 R4
 R5
 R85
-!i122 550
-l50
-L34 197
-V<?KNF`5GcTLXOfF60hY?M3
-!s100 FSY7gi:72a6=j^0X`im]m0
+!i122 560
+l41
+L34 181
+VLbW_Bc358Ji27^MX?H?[a2
+!s100 I9NUYYaS:Q42JfTEPAPaj0
 R8
 32
 R115
 !i10b 1
 R116
 R117
-Z118 !s107 C:/Users/anton/Documents/EDA322/EDA322/lab1/proc_controller.vhd|
+R118
 !i113 1
 R13
 R14
