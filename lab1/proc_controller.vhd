@@ -59,7 +59,7 @@ begin
         -- defaults
         busSel <= "0000";
         dmRead <= '0';
-        
+
         case state is
             when FE =>
                 -- defaults
@@ -67,9 +67,7 @@ begin
                 pcSel <= '0';
                 dmRead <= '0';
                 dmWrite <= '0';
-                aluOp <= A_XOR;
                 flagLd <= '0';
-                accSel <= '0';
                 accLd <= '0';
                 inReady <= '0';
                 outValid <= '0';
