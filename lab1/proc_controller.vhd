@@ -43,6 +43,14 @@ architecture behavioral of proc_controller is
 begin
 
     op <= opcode;
+    iImRead <= '0';
+    iDmRead <= '0';
+    iDmWrite <= '0';
+    iPcLd <= '0';
+    iFlagLd <= '0';
+    iAccLd <= '0';
+    iInReady <= '0';
+    iOutValid <= '0';
 
     -- State register
     process(clk, resetn)
@@ -56,7 +64,7 @@ begin
 
     process(master_load_enable)
     begin
-        if master_load_enable = 1 then
+        if master_load_enable = '1' then
             imRead <= iImRead;
             dmRead <= iDmRead;
             dmWrite <= iDmWrite;
@@ -65,7 +73,7 @@ begin
             accLd <= iAccLd;
             inReady <= iInReady;
             outValid <= iOutValid;
-        else then
+        else
             imRead <= '0';
             dmRead <= '0';
             dmWrite <= '0';
@@ -160,7 +168,7 @@ begin
                             next_state <= S_FETCH;
                         end if;
                     when O_OUT =>
-                        busSel <= '0000';
+                        busSel <= "0000";
                         iOutValid <= '1';
                         if outReady = '1' then
                             next_state <= S_FETCH;
@@ -228,14 +236,16 @@ begin
                 end case;
                 
             when S_ME =>
+                dmRead <= '0';
+                iDmWrite <= '1';
+                next_state <= S_FETCH;
                 case op is
-                    dmRead <= '0';
-                    iDmWrite <= '1';
-                    next_state <= S_FETCH;
                     when O_SB =>
                         busSel <= B_IMEM;
                     when O_SBI =>
                         busSel <= B_DMEM;
+                    when others =>
+                        busSel <= "0000";
                 end case;
             when others =>
                 next_state <= S_FETCH;
