@@ -32,8 +32,8 @@ entity proc_controller is
 end proc_controller;
 
 architecture behavioral of proc_controller is
-    type state_t is (S_FETCH, S_DECODE, S_DECODE2, S_EXEC, S_ME);
-    signal state, next_state: state_t := S_FETCH;
+    type state_t is (FE, DE1, DE2, EX, ME);
+    signal state, next_state: state_t := FE;
 
     -- local decoded alias
     signal op : op_t;
@@ -46,7 +46,7 @@ begin
     process(clk, resetn)
     begin
         if resetn = '0' then
-            state <= S_FETCH;
+            state <= FE;
         elsif rising_edge(clk) and master_load_enable = '1' then
             state <= next_state;
         end if;
@@ -58,21 +58,10 @@ begin
         
         -- defaults
         busSel <= "0000";
-        pcSel <= '0';
-        pcLd <= '0';
-        imRead <= '0';
         dmRead <= '0';
-        dmWrite <= '0';
-        aluOp <= A_XOR;
-        flagLd <= '0';
-        accSel <= '0';
-        accLd <= '0';
-        inReady <= '0';
-        outValid <= '0';
-        next_state <= S_FETCH;
-
+        
         case state is
-            when S_FETCH =>
+            when FE =>
                 -- defaults
                 busSel <= "0000";
                 pcSel <= '0';
@@ -88,9 +77,9 @@ begin
                 if master_load_enable = '1' then imRead <= '1'; else imRead <= '0'; end if;
                 if master_load_enable = '1' then pcLd <= '1'; else pcLd <= '0'; end if;
                 -- after fetch, go decode
-                next_state <= S_DECODE;
+                next_state <= DE1;
 
-            when S_DECODE =>
+            when DE1 =>
                 -- Default: advance PC
                 imRead <= '0';
                 pcLd <= '0';
@@ -99,34 +88,34 @@ begin
                 case op is
                     when O_NOOP =>
                         -- nothing more, return to fetch
-                        next_state <= S_FETCH;
+                        next_state <= FE;
 
                     when O_LBI =>
                         -- immediate / move from IM to ACC
                         if master_load_enable = '1' then DmRead <= '1'; else DmRead <= '0'; end if;
                         busSel <= B_IMEM;
-                        next_state <= S_DECODE2;
+                        next_state <= DE2;
                     when O_ADD | O_SUB | O_AND | O_XOR | O_CMP | O_LB =>
                         if master_load_enable = '1' then DmRead <= '1'; else DmRead <= '0'; end if;
                         busSel <= B_IMEM;
-                        next_state <= S_EXEC;
+                        next_state <= EX;
                     when O_SBI =>
                         if master_load_enable = '1' then DmRead <= '1'; else DmRead <= '0'; end if;
                         busSel <= B_IMEM;
-                        next_state <= S_ME;
+                        next_state <= ME;
                     when O_SB =>
-                        next_state <= S_ME;
+                        next_state <= ME;
                     when others =>
-                        next_state <= S_EXEC;
+                        next_state <= EX;
 
                 end case;
-            when S_DECODE2 =>
+            when DE2 =>
                 -- This state is only for LBI, which needs to load from DMEM  to get the immediate value, then load to ACC
                 if master_load_enable = '1' then DmRead <= '1'; else DmRead <= '0'; end if;
                 busSel <= B_DMEM;
-                next_state <= S_EXEC;
+                next_state <= EX;
 
-            when S_EXEC =>
+            when EX =>
                 dmRead <= '0';
                 case op is
                     when O_IN =>
@@ -135,84 +124,84 @@ begin
                         accSel <= '1';
                         if inValid = '1' then
                             if master_load_enable = '1' then accLd <= '1'; else accLd <= '0'; end if;
-                            next_state <= S_FETCH;
+                            next_state <= FE;
                         else
-                            next_state <= S_EXEC;
+                            next_state <= EX;
                         end if;
                     when O_OUT =>
                         busSel <= "0000";
                         if master_load_enable = '1' then outValid <= '1'; else outValid <= '0'; end if;
                         if outReady = '1' then
-                            next_state <= S_FETCH;
+                            next_state <= FE;
                         else
-                            next_state <= S_EXEC;
+                            next_state <= EX;
                         end if;
                     when O_MOV =>
                         busSel <= B_IMEM;
                         if master_load_enable = '1' then accLd <= '1'; else accLd <= '0'; end if;
                         accSel <= '1';
-                        next_state <= S_FETCH;
+                        next_state <= FE;
                     when O_J =>
                         if master_load_enable = '1' then pcLd <= '1'; else pcLd <= '0'; end if;
                         pcSel <= '1';
                         busSel <= B_ACC;
-                        next_state <= S_FETCH;
+                        next_state <= FE;
                     when O_JE =>
                         if master_load_enable = '1' then pcLd <= e_flag; else pcLd <= '0'; end if;
                         pcSel <= '1';
                         busSel <= B_IMEM;
-                        next_state <= S_FETCH;
+                        next_state <= FE;
                     when O_JNZ =>
                         if master_load_enable = '1' then pcLd <= not z_flag; else pcLd <= '0'; end if;
                         pcSel <= '1';
                         busSel <= B_IMEM;
-                        next_state <= S_FETCH;
+                        next_state <= FE;
                     when O_XOR =>
                         aluOp <= A_XOR;
                         if master_load_enable = '1' then flagLd <= '1'; else flagLd <= '0'; end if;
                         busSel <= B_DMEM;
                         accSel <= '0';
                         if master_load_enable = '1' then accLd <= '1'; else accLd <= '0'; end if;
-                        next_state <= S_FETCH;
+                        next_state <= FE;
                     when O_AND =>
                         aluOp <= A_AND;
                         busSel <= B_DMEM;
                         if master_load_enable = '1' then flagLd <= '1'; else flagLd <= '0'; end if;
                         accSel <= '0';
                         if master_load_enable = '1' then accLd <= '1'; else accLd <= '0'; end if;
-                        next_state <= S_FETCH;
+                        next_state <= FE;
                     when O_ADD =>
                         aluOp <= A_ADD;
                         busSel <= B_DMEM;
                         if master_load_enable = '1' then flagLd <= '1'; else flagLd <= '0'; end if;
                         accSel <= '0';
                         if master_load_enable = '1' then accLd <= '1'; else accLd <= '0'; end if;
-                        next_state <= S_FETCH;
+                        next_state <= FE;
                     when O_SUB =>
                         aluOp <= A_SUB;
                         busSel <= B_DMEM;
                         if master_load_enable = '1' then flagLd <= '1'; else flagLd <= '0'; end if;
                         accSel <= '0';
                         if master_load_enable = '1' then accLd <= '1'; else accLd <= '0'; end if;
-                        next_state <= S_FETCH;
+                        next_state <= FE;
                     when O_CMP =>
                         if master_load_enable = '1' then flagLd <= '1'; else flagLd <= '0'; end if;
                         busSel <= B_DMEM;
-                        next_state <= S_FETCH;
+                        next_state <= FE;
                     when O_LB | O_LBI =>
                         busSel <= B_DMEM;
                         if master_load_enable = '1' then accLd <= '1'; else accLd <= '0'; end if;
                         accSel <= '1';
-                        next_state <= S_FETCH;
+                        next_state <= FE;
                     when others =>
-                        next_state <= S_FETCH;
+                        next_state <= FE;
                     
                 end case;
                 
-            when S_ME =>
+            when ME =>
                 dmRead <= '0';
                 if master_load_enable = '1' then DmWrite <= '1'; else DmWrite <= '0'; end if;
-                next_state <= S_FETCH;
+                next_state <= FE;
                 case op is
                     when O_SB =>
                         busSel <= B_IMEM;
@@ -222,7 +211,7 @@ begin
                         busSel <= "0000";
                 end case;
             when others =>
-                next_state <= S_FETCH;
+                next_state <= FE;
         end case;
     end process;
 
