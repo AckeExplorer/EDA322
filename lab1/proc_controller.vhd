@@ -110,14 +110,14 @@ begin
                 -- defaults
                 busSel <= "0000";
                 pcSel <= '0';
-                dmRead <= '0';
-                dmWrite <= '0';
+                iDmRead <= '0';
+                iDmWrite <= '0';
                 aluOp <= A_XOR;
-                flagLd <= '0';
+                iFlagLd <= '0';
                 accSel <= '0';
-                accLd <= '0';
-                inReady <= '0';
-                outValid <= '0';
+                iAccLd <= '0';
+                iInReady <= '0';
+                iOutValid <= '0';
                 -- request instruction
                 iImRead <= '1';
                 iPcLd <= '1';
@@ -126,8 +126,8 @@ begin
 
             when S_DECODE =>
                 -- Default: advance PC
-                imRead <= '0';
-                pcLd <= '0';
+                iImRead <= '0';
+                iPcLd <= '0';
 
                 -- decode opcode and choose path
                 case op is
@@ -158,7 +158,7 @@ begin
                 next_state <= S_EXEC;
 
             when S_EXEC =>
-                dmRead <= '0';
+                iDmRead <= '0';
                 case op is
                     when O_IN =>
                         iInReady <= '1';
@@ -236,7 +236,7 @@ begin
                 end case;
                 
             when S_ME =>
-                dmRead <= '0';
+                iDmRead <= '0';
                 iDmWrite <= '1';
                 next_state <= S_FETCH;
                 case op is
