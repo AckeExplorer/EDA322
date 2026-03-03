@@ -9,12 +9,52 @@ end processor_tb;
 
 architecture tb_processor_arch of processor_tb is
 
-    signal clk, g_clk : std_logic;
-    signal resetn, g_resetn : std_logic;
-    signal master_load_enable, g_master_load_enable : std_logic;
-    signal extIn, g_extIn : std_logic_vector(7 downto 0);
-    signal inValid, g_inValid : std_logic;
-    signal outReady, g_outReady : std_logic;
+    component reference_processor
+        port(
+            clk                : in  std_logic;
+            resetn             : in  std_logic;
+            master_load_enable : in  std_logic;
+            extIn              : in  std_logic_vector(7 downto 0);
+            inValid            : in  std_logic;
+            outReady           : in  std_logic;
+            pc2seg             : out std_logic_vector(7 downto 0);
+            imDataOut2seg      : out std_logic_vector(11 downto 0);
+            dmDataOut2seg      : out std_logic_vector(7 downto 0);
+            aluOut2seg         : out STD_LOGIC_VECTOR(7 downto 0);
+            acc2seg            : out std_logic_vector(7 downto 0);
+            busOut2seg         : out std_logic_vector(7 downto 0);
+            extOut             : out std_logic_vector(7 downto 0);
+            inReady            : out std_logic;
+            outValid           : out std_logic
+        );
+    end component;
+
+    component EDA322_processor
+        port(
+            clk                : in  std_logic;
+            resetn             : in  std_logic;
+            master_load_enable : in  std_logic;
+            extIn              : in  std_logic_vector(7 downto 0);
+            inValid            : in  std_logic;
+            outReady           : in  std_logic;
+            pc2seg             : out std_logic_vector(7 downto 0);
+            imDataOut2seg      : out std_logic_vector(11 downto 0);
+            dmDataOut2seg      : out std_logic_vector(7 downto 0);
+            aluOut2seg         : out STD_LOGIC_VECTOR(7 downto 0);
+            acc2seg            : out std_logic_vector(7 downto 0);
+            busOut2seg         : out std_logic_vector(7 downto 0);
+            extOut             : out std_logic_vector(7 downto 0);
+            inReady            : out std_logic;
+            outValid           : out std_logic
+        );
+    end component;
+
+    signal tb_clk : std_logic := '0';
+    signal tb_resetn : std_logic := '0';
+    signal tb_master_load_enable : std_logic := '0';
+    signal tb_extIn : std_logic_vector(7 downto 0):= (others => '0');
+    signal tb_inValid : std_logic := '0';
+    signal tb_outReady : std_logic := '0';
     signal pc2seg, g_pc2seg : std_logic_vector(7 downto 0);
     signal imDataOut2seg, g_imDataOut2seg : std_logic_vector(11 downto 0);
     signal dmDataOut2seg, g_dmDataOut2seg : std_logic_vector(7 downto 0);
@@ -26,14 +66,14 @@ architecture tb_processor_arch of processor_tb is
     signal outValid, g_outValid : std_logic;
 
 begin
-    golden: entity work.reference_processor(behavioral)
+    golden: entity work.reference_processor
             port map (
-                clk => g_clk,
-                resetn => g_resetn,
-                master_load_enable => g_master_load_enable,
-                extIn => g_extIn,
-                inValid => g_inValid,
-                outReady => g_outReady,
+                clk => tb_clk,
+                resetn => tb_resetn,
+                master_load_enable => tb_master_load_enable,
+                extIn => tb_extIn,
+                inValid => tb_inValid,
+                outReady => tb_outReady,
                 pc2seg => g_pc2seg,
                 imDataOut2seg => g_imDataOut2seg,
                 dmDataOut2seg => g_dmDataOut2seg,
@@ -45,14 +85,14 @@ begin
                 outValid => g_outValid
             );
 
-    real: entity work.EDA322_processor(behavioral)
+    real: entity work.EDA322_processor(structural)
             port map (
-                clk => clk,
-                resetn => resetn,
-                master_load_enable => master_load_enable,
-                extIn => extIn,
-                inValid => inValid,
-                outReady => outReady,
+                clk => tb_clk,
+                resetn => tb_resetn,
+                master_load_enable => tb_master_load_enable,
+                extIn => tb_extIn,
+                inValid => tb_inValid,
+                outReady => tb_outReady,
                 pc2seg => pc2seg,
                 imDataOut2seg => imDataOut2seg,
                 dmDataOut2seg => dmDataOut2seg,
@@ -64,17 +104,68 @@ begin
                 outValid => outValid              
             );
 
+    reset_process : process
+    begin
+        wait for 50 ns;
+        tb_resetn <= '1';
+        wait;
+    end process;
+    
     clk_process : process
     begin
         wait for 25 ns;
         tb_clk <= not tb_clk;
     end process;
 
-    
-    process
+    master_load_enable_process : process
     begin
-        
-        
+        wait for 50 ns;
+        tb_master_load_enable <= '1';
+        wait for 250 ns;
+        tb_master_load_enable <= '0';
+    end process;
+    
+    inValid_process : process
+    begin
+        wait for 100 ns;
+        tb_inValid <= '1';
+        wait for 200 ns;
+        tb_inValid <= '0';
     end process;
 
+    outReady_process : process
+    begin
+        wait for 150 ns;
+        tb_outReady <= '1';
+        wait for 200 ns;
+        tb_outReady <= '0';
+    end process;
+
+    extIn_process : process(tb_clk)
+    begin
+        if rising_edge(tb_clk) then
+            if tb_master_load_enable = '1' then
+                if tb_inValid = '1' then
+                    if tb_outReady = '1' then
+                        tb_extIn <= std_logic_vector(unsigned(tb_extIn) + 1);
+                    end if;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    stimulus_process : process(tb_clk)
+    begin
+        if rising_edge(tb_clk) then
+            assert (g_pc2seg ?= pc2seg) report "PC mismatch" severity error;
+            assert (g_imDataOut2seg ?= imDataOut2seg) report "Instruction Memory Data mismatch" severity error;
+            assert (g_dmDataOut2seg ?= dmDataOut2seg) report "Data Memory Data mismatch" severity error;
+            assert (g_aluOut2seg ?= aluOut2seg) report "ALU Output mismatch" severity error;
+            assert (g_acc2seg ?= acc2seg) report "Accumulator mismatch" severity error;
+            assert (g_busOut2seg ?= busOut2seg) report "Bus Output mismatch" severity error;
+            assert (g_extOut ?= extOut) report "External Output mismatch" severity error;
+            assert (g_inReady ?= inReady) report "inReady signal mismatch" severity error;
+            assert (g_outValid ?= outValid) report "outValid signal mismatch" severity error;
+        end if;
+    end process;
 end architecture tb_processor_arch;

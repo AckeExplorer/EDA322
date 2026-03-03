@@ -2,6 +2,9 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+library work;
+use work.chacc_pkg.all;
+
 
 entity EDA322_processor is
     generic (dInitFile : string := "d_memory_lab2.mif";
