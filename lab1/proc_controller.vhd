@@ -119,6 +119,7 @@ begin
                     when O_IN =>
                         if master_load_enable = '1' then inReady <= '1'; else inReady <= '0'; end if;
                         busSel <= B_EXT;
+                        accLd <= '0';
                         accSel <= '1';
                         if inValid = '1' then
                             if master_load_enable = '1' then accLd <= '1'; else accLd <= '0'; end if;

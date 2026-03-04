@@ -115,30 +115,20 @@ begin
     clk_process : process
     begin
         wait for 25 ns;
-        tb_clk <= not tb_clk;
+        if last2ExtOut /= x"DEAD" then
+            tb_clk <= not tb_clk;
+        end if;
     end process;
 
     master_load_enable_process : process
     begin
         wait for 50 ns;
         tb_master_load_enable <= '1';
-        wait for 250 ns;
-        tb_master_load_enable <= '0';
-    end process;
-    
-    inValid_process : process
-    begin
-        wait for 100 ns;
         tb_inValid <= '1';
-        wait for 200 ns;
-        tb_inValid <= '0';
-    end process;
-
-    outReady_process : process
-    begin
-        wait for 150 ns;
         tb_outReady <= '1';
-        wait for 200 ns;
+        wait for 250 ns;
+        tb_inValid <= '0';
+        tb_master_load_enable <= '0';
         tb_outReady <= '0';
     end process;
 
@@ -147,7 +137,7 @@ begin
         if rising_edge(tb_clk) then
             if tb_master_load_enable = '1' then
                 if tb_inValid = '1' then
-                    if tb_outReady = '1' then
+                    if inReady = '1' then
                         tb_extIn <= std_logic_vector(unsigned(tb_extIn) + 1);
                     end if;
                 end if;
@@ -155,19 +145,22 @@ begin
         end if;
     end process;
 
-    stimulus_process : process(tb_clk)
+    stimulus_process : process
     begin
-        if rising_edge(tb_clk) then
+        loop
+            wait until rising_edge(tb_clk);
+            wait for 10 ns; -- wait for outputs to stabilize
             assert (g_pc2seg ?= pc2seg) report "PC mismatch" severity error;
-            assert (g_imDataOut2seg ?= imDataOut2seg) report "Instruction Memory Data mismatch" severity error;
-            assert (g_dmDataOut2seg ?= dmDataOut2seg) report "Data Memory Data mismatch" severity error;
+            assert (g_imDataOut2seg = imDataOut2seg) report "Instruction Memory Data mismatch" severity error;
+            assert (g_dmDataOut2seg = dmDataOut2seg) report "Data Memory Data mismatch" severity error;
             assert (g_aluOut2seg ?= aluOut2seg) report "ALU Output mismatch" severity error;
             assert (g_acc2seg ?= acc2seg) report "Accumulator mismatch" severity error;
             assert (g_busOut2seg ?= busOut2seg) report "Bus Output mismatch" severity error;
             assert (g_extOut ?= extOut) report "External Output mismatch" severity error;
             assert (g_inReady ?= inReady) report "inReady signal mismatch" severity error;
             assert (g_outValid ?= outValid) report "outValid signal mismatch" severity error;
-        end if;
+            assert (last2ExtOut /= x"DEAD") report "Testbench completed successfully!" severity note;
+        end loop;
     end process;
 
     end_process: process(tb_clk)
@@ -177,9 +170,6 @@ begin
                 if outValid = '1' then
                     if tb_outReady = '1' then
                         last2ExtOut <= last2ExtOut(7 downto 0) & extOut;
-                        if last2ExtOut = x"DEAD" then
-                        assert false report "Testbench completed successfully!" severity note;
-                        end if;
                     end if;
                 end if;
             end if;

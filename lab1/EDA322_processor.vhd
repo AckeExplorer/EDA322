@@ -44,6 +44,7 @@ architecture structural of EDA322_processor is
     signal bus_sel: std_logic_vector(3 downto 0);
     signal e_flagV, z_flagV, e_flagVout, z_flagVout : std_logic_vector(0 downto 0);
 
+
 begin
     controller: entity work.proc_controller(behavioral)
         port map(clk => clk,
@@ -63,9 +64,11 @@ begin
         pcSel => pc_sel,
         imRead => imRead,
         dmRead => dmRead,
-        dmWrite => dmWrite);
+        dmWrite => dmWrite,
+        inReady => inReady,
+        outValid => outValid);
 
-    pc_b_in <= not ('0' & busOut(6 downto 0)) when busOut(7) else '0' & busOut(6 downto 0);
+    pc_b_in <= not ('0' & busOut(6 downto 0)) when busOut(7) = '1' else '0' & busOut(6 downto 0);
 
     pc_inc: entity work.csa(structural)
         port map(A => pc_out,
@@ -73,8 +76,8 @@ begin
         cin => '1',
         O => pc_incr_out);
     pc_jump_address: entity work.csa(structural)
-        port map(A => pc_b_in,
-        B => '0' & busOut(6 downto 0),
+        port map(A => pc_out,
+        B => pc_b_in,
         cin => busOut(7),
         O => pc_jump_addr);
 
@@ -117,7 +120,7 @@ begin
         port map(clk => clk,
         rstn => resetn,
         en => accLd,
-        d => busOut,
+        d => acc_in,
         q => acc);
     extOut <= acc;
     acc2seg <= acc;
