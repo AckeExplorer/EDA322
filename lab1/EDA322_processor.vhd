@@ -7,8 +7,8 @@ use work.chacc_pkg.all;
 
 
 entity EDA322_processor is
-    generic (dInitFile : string := "d_memory_lab2.mif";
-             iInitFile : string := "i_memory_lab2.mif");
+    generic (dInitFile : string := "d_memory_lab4.mif";
+             iInitFile : string := "i_memory_lab4.mif");
     port(
         clk                : in  std_logic;
         resetn             : in  std_logic;

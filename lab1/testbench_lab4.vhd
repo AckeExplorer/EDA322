@@ -172,11 +172,16 @@ begin
 
     end_process: process(tb_clk)
     begin
-        if rising_edge(tb_clk) and master_load_enable = '1' and outValid = '1' and tb_outReady = '1' then
-            last2ExtOut <= last2ExtOut(7 downto 0) & extOut;
-            if last2ExtOut = x"DEAD" then
-                assert false report "Testbench completed successfully!" severity note;
-                wait;
+        if rising_edge(tb_clk) then
+            if tb_master_load_enable = '1' then
+                if outValid = '1' then
+                    if tb_outReady = '1' then
+                        last2ExtOut <= last2ExtOut(7 downto 0) & extOut;
+                        if last2ExtOut = x"DEAD" then
+                        assert false report "Testbench completed successfully!" severity note;
+                        end if;
+                    end if;
+                end if;
             end if;
         end if;
     end process;
