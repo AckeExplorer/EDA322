@@ -64,6 +64,7 @@ architecture tb_processor_arch of processor_tb is
     signal extOut, g_extOut : std_logic_vector(7 downto 0);
     signal inReady, g_inReady : std_logic;
     signal outValid, g_outValid : std_logic;
+    signal last2ExtOut : std_logic_vector(15 downto 0);
 
 begin
     golden: entity work.reference_processor
@@ -168,4 +169,16 @@ begin
             assert (g_outValid ?= outValid) report "outValid signal mismatch" severity error;
         end if;
     end process;
+
+    end_process: process(tb_clk)
+    begin
+        if rising_edge(tb_clk) and master_load_enable = '1' and outValid = '1' and tb_outReady = '1' then
+            last2ExtOut <= last2ExtOut(7 downto 0) & extOut;
+            if last2ExtOut = x"DEAD" then
+                assert false report "Testbench completed successfully!" severity note;
+                wait;
+            end if;
+        end if;
+    end process;
+
 end architecture tb_processor_arch;
