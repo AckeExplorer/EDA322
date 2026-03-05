@@ -115,9 +115,7 @@ begin
     clk_process : process
     begin
         wait for 25 ns;
-        if last2ExtOut /= x"DEAD" then
-            tb_clk <= not tb_clk;
-        end if;
+        tb_clk <= not tb_clk;
     end process;
 
     master_load_enable_process : process
@@ -130,6 +128,20 @@ begin
         tb_inValid <= '0';
         tb_master_load_enable <= '0';
         tb_outReady <= '0';
+        wait for 50 ns;
+        tb_master_load_enable <= '1';
+        wait for 50 ns;
+        tb_inValid <= '1';
+        wait for 50 ns;
+        tb_inValid <= '0';
+        tb_outReady <= '1';
+        wait for 50 ns;
+        tb_master_load_enable <= '0';
+        wait for 50 ns;
+        tb_inValid <= '1';
+        wait for 50 ns;
+        tb_inValid <= '0';
+        tb_outReady <= '1'; 
     end process;
 
     extIn_process : process(tb_clk)
@@ -159,7 +171,7 @@ begin
             assert (g_extOut ?= extOut) report "External Output mismatch" severity error;
             assert (g_inReady ?= inReady) report "inReady signal mismatch" severity error;
             assert (g_outValid ?= outValid) report "outValid signal mismatch" severity error;
-            assert (last2ExtOut /= x"DEAD") report "Testbench completed successfully!" severity note;
+            assert (last2ExtOut /= x"DEAD") report "Testbench completed successfully!" severity failure;
         end loop;
     end process;
 
