@@ -141,7 +141,9 @@ begin
         tb_inValid <= '1';
         wait for 50 ns;
         tb_inValid <= '0';
-        tb_outReady <= '1'; 
+        wait for 50 ns;
+        tb_outReady <= '0';
+        tb_inValid <= '1';
     end process;
 
     extIn_process : process(tb_clk)
