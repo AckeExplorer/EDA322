@@ -115,7 +115,9 @@ begin
     clk_process : process
     begin
         wait for 25 ns;
-        tb_clk <= not tb_clk;
+        if last2ExtOut /= x"DEAD" then
+            tb_clk <= not tb_clk;
+        end if;  
     end process;
 
     master_load_enable_process : process
@@ -163,7 +165,7 @@ begin
     begin
         loop
             wait until rising_edge(tb_clk);
-            wait for 10 ns; -- wait for outputs to stabilize
+            wait for 10 ns;
             assert (g_pc2seg ?= pc2seg) report "PC mismatch" severity error;
             assert (g_imDataOut2seg = imDataOut2seg) report "Instruction Memory Data mismatch" severity error;
             assert (g_dmDataOut2seg = dmDataOut2seg) report "Data Memory Data mismatch" severity error;
